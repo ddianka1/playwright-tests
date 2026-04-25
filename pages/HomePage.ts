@@ -7,7 +7,7 @@ export class HomePage {
 
  constructor(page: Page) {
     this.page = page;
-    this.productLink = this.page.locator('text=Combination Pliers');
+    this.productLink = this.page.getByTestId('product-name').first();
 }
 async open() {
     await this.page.goto('/')

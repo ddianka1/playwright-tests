@@ -9,12 +9,12 @@ export class AccountPage {
     this.page = page;
 
     this.pageTitle = this.page.getByTestId('page-title');
-    this.userName = this.page.locator('text=Jane Doe');
+    this.userName = this.page.getByTestId('nav-menu');
   }
 
   async verifyAccountPage() {
     await expect(this.page).toHaveURL('/account');
     await expect(this.pageTitle).toHaveText('My account');
-    await expect(this.userName).toBeVisible();
+    await expect(this.userName).toContainText('Jane Doe');
   }
 }
