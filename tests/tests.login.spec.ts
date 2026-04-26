@@ -1,19 +1,18 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage';
+import { AccountPage } from '../pages/AccountPage';
+
+
 test('Verify login with valid credentials', async ({ page }) => {
-    await page.goto('/auth/login');
- const emailInput = page.locator('[data-test="email"]');
-  const passwordInput = page.locator('[data-test="password"]');
-  const loginButton = page.locator('[data-test="login-submit"]');
+  const loginPage = new LoginPage(page);
+  const accountPage = new AccountPage(page);
 
-  await emailInput.fill('customer@practicesoftwaretesting.com');
-  await passwordInput.fill('welcome01');
-  await loginButton.click();
+  await loginPage.open();
 
-  await expect(page).toHaveURL('/account');
-  const myAccount = page.locator('[data-test="page-title"]');
-  await expect(myAccount).toHaveText('My account');
+  await loginPage.performLogin(
+    'customer@practicesoftwaretesting.com',
+    'welcome01'
+  );
 
-  const userName = page.locator('text=Jane Doe');
-  await expect(userName).toBeVisible();
-
+  await accountPage.verifyAccountPage();
 });
