@@ -16,7 +16,9 @@ export default defineConfig(
             "eslint.config.mjs",
             "playwright.config.ts",
             "tests/*.ts",
-            "pages/*.ts"
+            "pages/*.ts",
+            "utils/*.ts"
+
           ],
         },
       },

@@ -2,6 +2,7 @@ import { test } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { AccountPage } from '../pages/AccountPage';
 
+const authFile = 'playwright/.auth/user.json';
 
 test.skip('Verify login with valid credentials', async ({ page }) => {
   const loginPage = new LoginPage(page);
@@ -13,6 +14,6 @@ test.skip('Verify login with valid credentials', async ({ page }) => {
     'customer@practicesoftwaretesting.com',
     'welcome01'
   );
-
   await accountPage.verifyAccountPage();
+  await page.context().storageState({ path: authFile });
 });

@@ -17,7 +17,9 @@
     /* Type Checking */
     "strict": true, /* Enable all strict type-checking options. */
     "noEmit": true, /* Disable compiled files generation. */
-    
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types"]
+
     /* Completeness */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
