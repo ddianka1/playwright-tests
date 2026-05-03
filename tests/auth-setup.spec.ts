@@ -4,7 +4,7 @@ import { AccountPage } from '../pages/AccountPage';
 
 const authFile = 'playwright/.auth/user.json';
 
-test.skip('Verify login with valid credentials', async ({ page }) => {
+test('Verify login with valid credentials', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const accountPage = new AccountPage(page);
 
