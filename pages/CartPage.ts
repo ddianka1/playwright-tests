@@ -11,8 +11,4 @@ export class CartPage {
     this.productTitles = this.page.getByTestId('product-title');
     this.proceedToCheckoutButton = this.page.getByTestId('proceed-1');
   }
-
-  async open() {
-    await this.page.getByTestId('nav-cart').click();
-  }
 }

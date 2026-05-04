@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test';
+
 export class HomePage {
  page: Page;
  
@@ -15,8 +16,8 @@ async openProductByName(name: string) {
       .click();
  }
 
-async sortBy(option: string) {
-  await this.page.getByTestId('sort').selectOption(option);
+ async sortBy(value: 'name,asc' | 'name,desc' | 'price,asc' | 'price,desc') {
+  await this.page.getByTestId('sort').selectOption(value);
 }
 
 async getProductNames() {
@@ -32,4 +33,7 @@ async selectSubCategory(name: string) {
   await this.page.getByLabel(name, { exact: true }).check();
 }
  
+async openCart() {
+    await this.page.getByTestId('nav-cart').click();
+  }
 }

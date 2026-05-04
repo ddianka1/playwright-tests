@@ -11,12 +11,13 @@ test('Verify product details', async ({ page }) => {
   await homePage.open();
   await homePage.openProductByName('Slip Joint Pliers');
   await expect(page).toHaveURL(/product/);
-
+  const productName = 'Slip Joint Pliers';
+  const productPrice = '9.17';
   await expect(productPage.productName)
-    .toHaveText('Slip Joint Pliers');
+    .toHaveText(productName);
 
   await expect(productPage.productPrice)
-    .toHaveText('9.17');
+    .toHaveText(productPrice);
 
   await productPage.addToCart();
 
@@ -30,7 +31,7 @@ test('Verify product details', async ({ page }) => {
   await expect(productPage.cartQuantity).toHaveValue("1");
 
 
-  await cartPage.open();
+  await homePage.openCart();
 
   await expect(page).toHaveURL(/checkout/);
   await expect(cartPage.productTitles).toHaveCount(1);

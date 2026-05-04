@@ -4,7 +4,7 @@ import { HomePage } from '../pages/HomePage';
 const cases = [
   { option: 'name,asc', order: 'asc' },
   { option: 'name,desc', order: 'desc' }
-];
+] as const;
 
 test.describe('Sorting by name', () => {
 

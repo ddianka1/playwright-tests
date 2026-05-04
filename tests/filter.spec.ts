@@ -8,11 +8,8 @@ test('Verify filter by Sander', async ({ page }) => {
   await homePage.open();
 
   await homePage.selectSubCategory('Sander');
-
-  // перевірка що інші товари зникли
-  await expect(
-    page.getByTestId('product-name').filter({ hasText: 'Combination Pliers' })
-  ).toHaveCount(0);
+  await expect(page.getByTestId('product-name').first())
+    .toContainText('Sander');
 
   const names = await homePage.getProductNames();
 
