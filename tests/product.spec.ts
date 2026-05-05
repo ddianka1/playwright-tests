@@ -1,13 +1,43 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { HomePage } from '../pages/HomePage';
 import { ProductPage } from '../pages/ProductPage';
+import { CartPage } from '../pages/CartPage';
 
-test('Verify user can view product details', async ({ page }) => {
+test('Verify product details', async ({ page }) => {
   const homePage = new HomePage(page);
   const productPage = new ProductPage(page);
-
+  const cartPage = new CartPage(page);
+  // Checks
   await homePage.open();
-  await homePage.openProduct();
+  await homePage.openProductByName('Slip Joint Pliers');
+  await expect(page).toHaveURL(/product/);
+  const productName = 'Slip Joint Pliers';
+  const productPrice = '9.17';
+  await expect(productPage.productName)
+    .toHaveText(productName);
 
-  await productPage.verifyProductDetails();
+  await expect(productPage.productPrice)
+    .toHaveText(productPrice);
+
+  await productPage.addToCart();
+
+  await expect(productPage.alertMessage).toBeVisible();
+  await expect(productPage.alertMessage)
+    .toHaveText('Product added to shopping cart.');
+
+  await expect(productPage.alertMessage)
+    .toBeHidden({ timeout: 8000 });
+
+  await expect(productPage.cartQuantity).toHaveValue("1");
+
+
+  await homePage.openCart();
+
+  await expect(page).toHaveURL(/checkout/);
+  await expect(cartPage.productTitles).toHaveCount(1);
+  await expect(cartPage.productTitles)
+    .toHaveText('Slip Joint Pliers');
+
+  await expect(cartPage.proceedToCheckoutButton)
+    .toBeVisible();
 });
