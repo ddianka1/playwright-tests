@@ -15,6 +15,6 @@ export class AccountPage {
   async verifyAccountPage() {
     await expect(this.page).toHaveURL('/account');
     await expect(this.pageTitle).toHaveText('My account');
-    await expect(this.userName).toContainText('Jane Doe');
+    await expect(this.userName).toContainText('Jack Howe');
   }
 }

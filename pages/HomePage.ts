@@ -36,4 +36,16 @@ async selectSubCategory(name: string) {
 async openCart() {
     await this.page.getByTestId('nav-cart').click();
   }
+  
+async getFirstProductName() {
+  return await this.page.getByTestId('product-name').first().textContent();
+}
+
+async getFirstProductPrice() {
+  return await this.page.getByTestId('product-price').first().textContent();
+}
+
+async openFirstProduct() {
+  await this.page.getByTestId('product-name').first().click();
+}
 }

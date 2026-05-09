@@ -1,5 +1,4 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../pages/HomePage';
+import { test, expect } from '../fixtures/app';
 
 const cases = [
   { option: 'price,asc', order: 'asc' },
@@ -8,14 +7,14 @@ const cases = [
 
 test.describe('Sorting by price', () => {
   for (const c of cases) {
-    test(`Verify sorting price ${c.order}`, async ({ page }) => {
-      const homePage = new HomePage(page);
+    test(`Verify sorting price ${c.order}`, async ({ page, app }) => {
+      
 
-      await homePage.open();
+      await app.homePage.open();
 
-      await homePage.sortBy(c.option);
+      await app.homePage.sortBy(c.option);
 
-      const prices = await homePage.getProductPrices();
+      const prices = await app.homePage.getProductPrices();
 
       const sorted = [...prices].sort((a, b) => a - b);
 

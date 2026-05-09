@@ -17,7 +17,8 @@ export default defineConfig(
             "playwright.config.ts",
             "tests/*.ts",
             "pages/*.ts",
-            "utils/*.ts"
+            "utils/*.ts",
+            "fixtures/*.ts"
 
           ],
         },
