@@ -37,7 +37,7 @@ export class PaymentPage {
     await this.cardHolderName.fill(cardHolderName);
   }
 
-  async confirmPayment() {
+  async confirmPayment(): Promise<void> {
     await this.confirmButton.click();
   }
 }

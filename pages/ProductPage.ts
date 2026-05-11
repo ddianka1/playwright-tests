@@ -20,7 +20,7 @@ export class ProductPage {
     this.cartQuantity = this.page.getByTestId('quantity');
   }
 
-  async addToCart() {
+ async addToCart(): Promise<void> {
     await this.addToCartButton.click();
   }
 }

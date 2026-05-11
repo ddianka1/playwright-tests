@@ -10,7 +10,7 @@ export class CheckoutPage {
     this.proceedToCheckoutButton = this.page.getByTestId('proceed-2');
   }
 
-  async proceedToBillingAddress() {
+  async proceedToBillingAddress(): Promise<void> {
     await this.proceedToCheckoutButton.click();
   }
 }

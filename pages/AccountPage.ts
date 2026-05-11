@@ -12,7 +12,7 @@ export class AccountPage {
     this.userName = this.page.getByTestId('nav-menu');
   }
 
-  async verifyAccountPage() {
+  async verifyAccountPage(): Promise<void> {
     await expect(this.page).toHaveURL('/account');
     await expect(this.pageTitle).toHaveText('My account');
     await expect(this.userName).toContainText('Jack Howe');

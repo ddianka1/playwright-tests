@@ -16,13 +16,13 @@ export class BillingAddressPage {
 
   }
 
-  async fillRequiredFields() {
-  await this.countryCheckoutPage.selectOption({ label: 'Ukraine' });;
+  async fillRequiredFields(): Promise<void>{
+  await this.countryCheckoutPage.selectOption({ label: 'Ukraine' });
   await this.postalCodeCheckoutPage.fill('58000');
   await this.houseNumberCheckoutPage.fill('10');
 }
 
-  async proceedToPayment() {
+  async proceedToPayment(): Promise<void>  {
     await this.addressCheckoutPageProceedBtn.click();
   }
 }

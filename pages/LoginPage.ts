@@ -14,11 +14,11 @@ export class LoginPage {
     this.loginButton = this.page.getByTestId('login-submit');
   }
 
-  async open() {
+  async open(): Promise<void> {
     await this.page.goto('/auth/login');
   }
 
-  async performLogin(email: string, password: string) {
+  async performLogin(email: string, password: string): Promise<void> {
     await this.emailField.fill(email);
     await this.passwordField.fill(password);
     await this.loginButton.click();
