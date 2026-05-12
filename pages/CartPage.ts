@@ -10,5 +10,8 @@ export class CartPage {
 
     this.productTitles = this.page.getByTestId('product-title');
     this.proceedToCheckoutButton = this.page.getByTestId('proceed-1');
-  }
+ }
+   async proceedToCheckout(): Promise<void>{
+  await this.proceedToCheckoutButton.click();
+}
 }
