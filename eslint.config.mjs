@@ -15,10 +15,12 @@ export default defineConfig(
             allowDefaultProject: [
             "eslint.config.mjs",
             "playwright.config.ts",
-            "tests/*.ts",
+            "tests/**/*.ts",
             "pages/*.ts",
             "utils/*.ts",
-            "fixtures/*.ts"
+            "fixtures/*.ts",
+            "helpers/*.ts",
+          
 
           ],
         },
