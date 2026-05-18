@@ -1,10 +1,12 @@
-import { Page } from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 
 export class HomePage {
  page: Page;
+ productNames: Locator;
  
 constructor(page: Page) {
     this.page = page;
+    this.productNames = this.page.getByTestId('product-name');
  }
 async open(): Promise<void>  {
     await this.page.goto('/')

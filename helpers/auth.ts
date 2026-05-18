@@ -1,4 +1,5 @@
 import { APIRequestContext, Page, expect } from '@playwright/test';
+import { authData } from '../utils/test-data'
 
 type LoginResponse = {
   access_token: string;
@@ -7,12 +8,12 @@ export async function loginByApi(
   request: APIRequestContext,
   page: Page
 ): Promise<void> {
-  const response = await request.post(
-    'https://api.practicesoftwaretesting.com/users/login',
+   const response = await request.post(
+    authData.apiLoginUrl,
     {
       data: {
-        email: 'customer2@practicesoftwaretesting.com',
-        password: 'welcome01',
+        email: authData.email,
+        password: authData.password,
       },
     }
   );

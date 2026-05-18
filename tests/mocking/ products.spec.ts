@@ -1,6 +1,6 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../fixtures/app';
 
-test('Verify mocked products', async ({ page }) => {
+test('Verify mocked products', async ({ app, page }) => {
   const mockedProducts: {
     id: number;
     name: string;
@@ -35,7 +35,7 @@ test('Verify mocked products', async ({ page }) => {
     }
   );
 
-  await page.goto('https://practicesoftwaretesting.com/');
+await app.homePage.open();
 
-  await expect(page.getByTestId('product-name')).toHaveCount(20);
+await expect(app.homePage.productNames).toHaveCount(20);
 });
