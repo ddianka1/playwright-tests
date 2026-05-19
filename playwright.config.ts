@@ -35,10 +35,10 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    { 
+    //{ 
       //name: 'setup', 
       //testMatch: /auth-setup\.spec\.ts/ 
-    },
+    //},
     {
       name: 'chromium',
       use: { 

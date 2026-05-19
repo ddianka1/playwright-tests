@@ -1,20 +1,14 @@
 import { test as base, expect } from './app';
 import { App } from '../pages/App';
+import { loginByApi } from '../helpers/auth';
 
 type LoggedInAppFixture = {
   loggedInApp: App;
 };
 
 const test = base.extend<LoggedInAppFixture>({
-  loggedInApp: async ({ app }, use) => {
-    await app.loginPage.open();
-
-    await app.loginPage.performLogin(
-      'customer2@practicesoftwaretesting.com',
-      'welcome01'
-    );
-
-    await app.accountPage.verifyAccountPage();
+ loggedInApp: async ({ app, request, page }, use) => {
+    await loginByApi(request, page);
 
     await use(app);
   },
