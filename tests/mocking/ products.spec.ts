@@ -1,6 +1,6 @@
 import { test, expect } from '../../fixtures/app';
 
-test('Verify mocked products', async ({ app, page }) => {
+test('Verify mocked products @regression', async ({ app, page }) => {
   const mockedProducts: {
     id: number;
     name: string;

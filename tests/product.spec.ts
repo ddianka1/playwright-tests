@@ -1,6 +1,6 @@
 import { test, expect } from '../fixtures/app';
 
-test('Verify product details', async ({ page, app }) => {
+test('Verify product details @smoke', async ({ page, app }) => {
  
   // Checks
   await app.homePage.open();

@@ -1,6 +1,6 @@
 import { test, expect } from '../fixtures/app';
 
-test('Verify filter by Sander', async ({ page, app }) => {
+test('Verify filter by Sander @regression', async ({ page, app }) => {
   
 
   await app.homePage.open();
