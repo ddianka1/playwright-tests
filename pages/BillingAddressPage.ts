@@ -22,7 +22,8 @@ export class BillingAddressPage {
   await this.houseNumberCheckoutPage.fill('10');
 }
 
-  async proceedToPayment(): Promise<void>  {
-    await this.addressCheckoutPageProceedBtn.click();
-  }
+  async proceedToPayment(): Promise<void> {
+  await this.addressCheckoutPageProceedBtn.waitFor({ state: 'visible' });
+  await this.addressCheckoutPageProceedBtn.click();
+}
 }
