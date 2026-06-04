@@ -1,0 +1,28 @@
+name: Smoke Tests
+
+on:
+  push:
+    branches: [ main, master, Unit-15 ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  smoke:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+
+    env:
+      BASE_URL: ${{ vars.BASE_URL }}
+      API_LOGIN_URL: ${{ vars.API_LOGIN_URL }}
+      USER_NAME: ${{ vars.USER_NAME }}
+      USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - run: npm ci
+      - run: npx playwright install --with-deps
+      - run: npx playwright test --grep @smoke

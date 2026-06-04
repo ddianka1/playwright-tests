@@ -5,7 +5,7 @@ const cases = [
   { option: 'price,desc', order: 'desc' }
 ] as const;
 
-test.describe('Sorting by price', () => {
+test.describe('Sorting by price @regression', () => {
   for (const c of cases) {
     test(`Verify sorting price ${c.order}`, async ({ page, app }) => {
       

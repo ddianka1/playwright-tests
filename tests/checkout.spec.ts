@@ -1,50 +1,63 @@
- import { test, expect } from '../fixtures/loggedInApp';
+import { test, expect } from '../fixtures/loggedInApp';
 
-test('Verify logged in user can checkout product', async ({ loggedInApp }) => {
-  await loggedInApp.homePage.open();
+test('Verify logged in user can checkout product @smoke', async ({ loggedInApp }) => {
 
-  const productName = await loggedInApp.homePage.getFirstProductName();
-  const productPrice = await loggedInApp.homePage.getFirstProductPrice();
+  let productName: string | null;
+  let productPrice: string | null;
 
-  await loggedInApp.homePage.openFirstProduct();
+  await test.step('Open product page and save product data', async () => {
+    await loggedInApp.homePage.open();
 
-  await loggedInApp.productPage.addToCart();
+    productName = await loggedInApp.homePage.getFirstProductName();
+    productPrice = await loggedInApp.homePage.getFirstProductPrice();
 
-  await expect(loggedInApp.productPage.alertMessage)
-    .toHaveText('Product added to shopping cart.');
+    await loggedInApp.homePage.openFirstProduct();
+  });
 
-  await loggedInApp.homePage.openCart();
+  await test.step('Add product to cart', async () => {
+    await loggedInApp.productPage.addToCart();
 
-  await expect(loggedInApp.cartPage.productTitles)
-    .toHaveText(productName!.trim());
+    await expect(loggedInApp.productPage.alertMessage)
+      .toHaveText('Product added to shopping cart.');
+  });
 
-  await loggedInApp.cartPage.proceedToCheckout();
+  await test.step('Verify product in cart', async () => {
+    await loggedInApp.homePage.openCart();
 
-  await expect(loggedInApp.checkoutPage.proceedToCheckoutButton)
-  .toBeVisible();
+    await expect(loggedInApp.cartPage.productTitles)
+      .toHaveText(productName!.trim());
+  });
 
-  await loggedInApp.checkoutPage.proceedToBillingAddress();
+  await test.step('Proceed to checkout', async () => {
+    await loggedInApp.cartPage.proceedToCheckout();
 
+    await expect(loggedInApp.checkoutPage.proceedToCheckoutButton)
+      .toBeVisible();
 
-  await loggedInApp.billingAddressPage.fillRequiredFields();
-  await loggedInApp.billingAddressPage.proceedToPayment();
+    await loggedInApp.checkoutPage.proceedToBillingAddress();
+  });
 
-  await loggedInApp.paymentPage.selectPaymentMethod('Credit Card');
+  await test.step('Fill billing address', async () => {
+    await loggedInApp.billingAddressPage.fillRequiredFields();
+    await loggedInApp.billingAddressPage.proceedToPayment();
+  });
 
-  // payment
-  await loggedInApp.paymentPage.fillCardDetails(
-  '1111-1111-1111-1111',
-  '05/2030',
-  '111',
-  'Test User'
-);
+  await test.step('Complete payment', async () => {
+    await loggedInApp.paymentPage.selectPaymentMethod('Credit Card');
 
-  await loggedInApp.paymentPage.confirmPayment();
+    await loggedInApp.paymentPage.fillCardDetails(
+      '1111-1111-1111-1111',
+      '05/2030',
+      '111',
+      'Test User'
+    );
 
-// success message
-  await expect(loggedInApp.paymentPage.successMessage)
-  .toBeVisible();
+    await loggedInApp.paymentPage.confirmPayment();
+  });
+
+  await test.step('Verify successful payment', async () => {
+    await expect(loggedInApp.paymentPage.successMessage)
+      .toBeVisible();
+  });
 
 });
-
-
